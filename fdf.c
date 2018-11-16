@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:53:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/15 17:30:43 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/16 16:33:43 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ int		ft_nb_char(char *line)
 {
 	int		i;
 
-
+	i = 0;
+	while (*line)
+	{
+		if ((*line != ' ' && *(line + 1) == ' ') || (*line != ' ' && *(line + 1) == '\0'))
+			i++;
+		line++;
+	}
+	return (i);
 }
 
 char	**read_file(char *file)
@@ -28,17 +35,28 @@ char	**read_file(char *file)
 	int		nb_char;
 	char	*line;
 	char	**map;
+	int		i;
 
 	map = NULL;
 	fd = open(file, O_RDONLY);
 	nb_line = 0;
 	while (get_next_line(fd, &line))
 	{
-		nb_char = ft_nb_char(line);
+		if (!nb_char)
+			nb_char = ft_nb_char(line);
 		free(line);
 		nb_line++;
 	}
-	printf("nb_line = %d\n", nb_line);
+	close(fd);
+	if (!(map = (char**)malloc(sizeof(*map) * (nb_line + 1))))
+		return (NULL);
+	i = 0;
+	while (nb_words-- > 0)
+	{
+		if(!(map[i] = (char*)malloc(sizeof(**map) * (nb_char + 1))))
+			return (NULL);
+		i++;
+	}
 	return (map);
 }
 
@@ -56,6 +74,5 @@ int		main(int argc, char **argv)
 	mlx_ptr = mlx_init();
 	if (!mlx_ptr)
 		return (1);
-	mlx_loop(mlx_ptr);
 	return (0);
 }
