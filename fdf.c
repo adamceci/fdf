@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:53:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/16 16:33:43 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/21 19:58:49 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,69 @@ int		ft_nb_char(char *line)
 	return (i);
 }
 
-char	**read_file(char *file)
+int		**ft_fill_tab(int nb_line, int nb_char, char *file)
+{
+	int		**map;
+	int		fd;
+	int		i;
+	int		j;
+	char	*line;
+	char	*tmp;
+
+	fd = open(file, O_RDONLY);
+	if (!(map = (int**)malloc(sizeof(*map) * (nb_line + 1))))
+		return (NULL);
+	i = 0;
+	while (i < nb_line)
+	{
+		get_next_line(fd, &line);
+		printf("line[%d] = %s\n", i, line);
+		tmp = line;
+		if(!(map[i] = (int*)malloc(sizeof(**map) * (nb_char + 1))))
+			return (NULL);
+		j = 0;
+		while (j < nb_char)
+		{
+			map[i][j] = ft_atoi(line);
+			while (*line && *line == ' ')
+				line++;
+			while (*line && *line != ' ')
+				line++;
+			j++;
+		}
+		free(tmp);
+		i++;
+	}
+	i = 0;
+	while (i < nb_line)
+	{
+		printf("line[%d] = ", i);
+		j = 0;
+		while (j < nb_char)
+		{
+			printf("%d ", map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	close(fd);
+	return (map);
+}
+
+int		**read_file(char *file)
 {
 	int		fd;
 	int		nb_line;
 	int		nb_char;
 	char	*line;
-	char	**map;
+	int		**map;
 	int		i;
 
 	map = NULL;
 	fd = open(file, O_RDONLY);
 	nb_line = 0;
+	nb_char = 0;
 	while (get_next_line(fd, &line))
 	{
 		if (!nb_char)
@@ -48,22 +99,148 @@ char	**read_file(char *file)
 		nb_line++;
 	}
 	close(fd);
-	if (!(map = (char**)malloc(sizeof(*map) * (nb_line + 1))))
-		return (NULL);
-	i = 0;
-	while (nb_words-- > 0)
+	map = ft_fill_tab(nb_line, nb_char, file);
+	return (map);
+}
+
+void	*initialize()
+{
+	void	*mlx_ptr;
+
+	mlx_ptr = mlx_init();
+	if (mlx_ptr == NULL)
 	{
-		if(!(map[i] = (char*)malloc(sizeof(**map) * (nb_char + 1))))
-			return (NULL);
+		printf("failed to set up connection to the X server\n");
+		return (NULL);
+	}
+	return (mlx_ptr);
+}
+
+void	*create_window(void *mlx_ptr)
+{
+	void	*mlx_window;
+
+	mlx_window = mlx_new_window(mlx_ptr, 1000, 700, "fdf");
+	if (mlx_window == NULL)
+	{
+		printf("failed to create a new window\n");
+		return (NULL);
+	}
+	return (mlx_window);
+}
+
+/*
+int	ft_round(double nb)
+{
+	return (nb + 0.5);
+}
+*/
+
+int		ft_abs(int nb)
+{
+	if (nb >= 0)
+		return (nb);
+	return (-nb);
+}
+
+void	draw_line(void *mlx_ptr, void *mlx_window, int x0, int y0, int x1, int y1,
+		int color)
+{
+	int	i;
+	int	w;
+	int	h;
+	int	dx1;
+	int	dx2;
+	int	dy1;
+	int	dy2;
+	int	longest;
+	int	shortest;
+	int	numerator;
+
+	w = x1 - x0;
+	h = y1 - y0;
+	(w < 0) ? (dx1 = -1) : (dx1 = 1);
+	(h < 0) ? (dy1 = -1) : (dy1 = 1);
+	dx2 = dx1;
+	dy2 = 0;
+	longest = ft_abs(w);
+	shortest = ft_abs(h);
+	if (longest < shortest)
+	{
+		longest = shortest;
+		shortest = ft_abs(w);
+		(h < 0) ? (dy2 = -1) : (dy2 = 1);
+		dx2 = 0;
+	}
+	numerator = longest / 2;
+	i = 0;
+	while (i <= longest)
+	{
+		mlx_pixel_put(mlx_ptr, mlx_window, x0, y0, color);
+		numerator += shortest;
+		if (numerator >= longest)
+		{
+			numerator -= longest;
+			x0 += dx1;
+			y0 += dy1;
+		}
+		else
+		{
+			x0 += dx2;
+			y0 += dy2;
+		}
 		i++;
 	}
-	return (map);
+}
+
+void	draw(void *mlx_ptr, void *mlx_window, int **map)
+{
+	int	x;
+	int	y;
+	int	inc_x;
+	int	inc_y;
+	int	i;
+	int	j;
+
+	x = 50;
+	y = 50;
+	i = 0;
+	while (i < 5)
+	{
+		j = 0;
+		while (j < 9)
+		{
+			draw_line(mlx_ptr, mlx_window, x, y, x + 50, 50 * (i + 1), 8584960);
+			x += 50;
+			j++;
+		}
+		x = 50;
+		y += 50;
+		i++;
+	}
+	x = 50;
+	y = 50;
+	i = 0;
+	while (i < 10)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			draw_line(mlx_ptr, mlx_window, x, y, 50 * (i + 1), y + 50, 8584960);
+			y += 50;
+			j++;
+		}
+		y = 50;
+		x += 50;
+		i++;
+	}
 }
 
 int		main(int argc, char **argv)
 {
-	char	**map;
+	int		**map;
 	void	*mlx_ptr;
+	void	*mlx_window;
 
 	if (argc != 2)
 	{
@@ -71,8 +248,11 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	map = read_file(argv[1]);
-	mlx_ptr = mlx_init();
-	if (!mlx_ptr)
-		return (1);
+	if (!(mlx_ptr = initialize()))
+		return (0);
+	if (!(mlx_window = create_window(mlx_ptr)))
+		return (0);
+	draw(mlx_ptr, mlx_window, map);
+	mlx_loop(mlx_ptr);
 	return (0);
 }
