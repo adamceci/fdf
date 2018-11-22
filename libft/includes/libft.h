@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 12:39:51 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/15 15:40:15 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/22 15:34:49 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <limits.h>
 # include <fcntl.h>
+# include <limits.h>
 
 # define BUFF_SIZE	10
 
@@ -95,6 +95,7 @@ char				*ft_strlower(char *str);
 int					ft_isspace(int c);
 void				ft_bubble_sort(int *tab, int size);
 int					ft_sqrt(int nb);
+void				ft_swap(int *a, int *b);
 int					get_next_line(const int fd, char **line);
 
-#endif
+#	endif

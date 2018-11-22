@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:53:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/21 19:58:49 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/22 14:39:05 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,51 +143,49 @@ int		ft_abs(int nb)
 	return (-nb);
 }
 
+void	get_draw_infos(t_line *elem, int x0, int x1, int y0, int y1)
+{	
+	elem->w = x1 - x0;
+	elem->h = y1 - y0;
+	(elem->w < 0) ? (elem->dx1 = -1) : (elem->dx1 = 1);
+	(elem->h < 0) ? (elem->dy1 = -1) : (elem->dy1 = 1);
+	elem->dx2 = elem->dx1;
+	elem->dy2 = 0;
+	elem->longest = ft_abs(elem->w);
+	elem->shortest = ft_abs(elem->h);
+	if (elem->longest < elem->shortest)
+	{
+		elem->longest = elem->shortest;
+		elem->shortest = ft_abs(elem->w);
+		(elem->h < 0) ? (elem->dy2 = -1) : (elem->dy2 = 1);
+		elem->dx2 = 0;
+	}
+	elem->numerator = elem->longest / 2;
+}
+
 void	draw_line(void *mlx_ptr, void *mlx_window, int x0, int y0, int x1, int y1,
 		int color)
 {
+	t_line	*elem;
 	int	i;
-	int	w;
-	int	h;
-	int	dx1;
-	int	dx2;
-	int	dy1;
-	int	dy2;
-	int	longest;
-	int	shortest;
-	int	numerator;
 
-	w = x1 - x0;
-	h = y1 - y0;
-	(w < 0) ? (dx1 = -1) : (dx1 = 1);
-	(h < 0) ? (dy1 = -1) : (dy1 = 1);
-	dx2 = dx1;
-	dy2 = 0;
-	longest = ft_abs(w);
-	shortest = ft_abs(h);
-	if (longest < shortest)
-	{
-		longest = shortest;
-		shortest = ft_abs(w);
-		(h < 0) ? (dy2 = -1) : (dy2 = 1);
-		dx2 = 0;
-	}
-	numerator = longest / 2;
+	elem = (t_line*)malloc(sizeof(*elem));
+	get_draw_infos(elem, x0, x1, y0, y1);
 	i = 0;
-	while (i <= longest)
+	while (i <= elem->longest)
 	{
 		mlx_pixel_put(mlx_ptr, mlx_window, x0, y0, color);
-		numerator += shortest;
-		if (numerator >= longest)
+		elem->numerator += elem->shortest;
+		if (elem->numerator >= elem->longest)
 		{
-			numerator -= longest;
-			x0 += dx1;
-			y0 += dy1;
+			elem->numerator -= elem->longest;
+			x0 += elem->dx1;
+			y0 += elem->dy1;
 		}
 		else
 		{
-			x0 += dx2;
-			y0 += dy2;
+			x0 += elem->dx2;
+			y0 += elem->dy2;
 		}
 		i++;
 	}
@@ -238,21 +236,21 @@ void	draw(void *mlx_ptr, void *mlx_window, int **map)
 
 int		main(int argc, char **argv)
 {
-	int		**map;
-	void	*mlx_ptr;
-	void	*mlx_window;
+	int			**map;
+	t_mlx_infos	*mlx_info;
 
+	mlx_info = (t_mlx_infos*)malloc(sizeof(*mlx_info));
 	if (argc != 2)
 	{
 		ft_putstr("usage: ./fdf file\n");
 		return (0);
 	}
 	map = read_file(argv[1]);
-	if (!(mlx_ptr = initialize()))
+	if (!(mlx_info->ptr = initialize()))
 		return (0);
-	if (!(mlx_window = create_window(mlx_ptr)))
+	if (!(mlx_info->window = create_window(mlx_info->ptr)))
 		return (0);
-	draw(mlx_ptr, mlx_window, map);
-	mlx_loop(mlx_ptr);
+	draw(mlx_info->ptr, mlx_info->window, map);
+	mlx_loop(mlx_info->ptr);
 	return (0);
 }
