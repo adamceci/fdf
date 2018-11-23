@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:00:04 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/23 13:17:20 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/23 15:08:35 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef struct	s_map_infos
 	int			**map;
 	int			nb_line;
 	int			nb_num;
+	int			x0;
+	int			y0;
+	int			x1;
+	int			y1;
+	int			inc_x;
+	int			inc_y;
 }				t_map_infos;
 
 // Struct pour les retour des fonctions de la mlx

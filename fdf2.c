@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:53:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/23 19:30:02 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/23 19:37:46 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int		**ft_fill_tab(int nb_line, int nb_char, char *file)
 	while (i < nb_line)
 	{
 		get_next_line(fd, &line);
-		printf("line[%d] = %s\n", i, line);
 		tmp = line;
 		if(!(map[i] = (int*)malloc(sizeof(**map) * (nb_char + 1))))
 			return (NULL);
@@ -65,14 +64,11 @@ int		**ft_fill_tab(int nb_line, int nb_char, char *file)
 	i = 0;
 	while (i < nb_line)
 	{
-		printf("line[%d] = ", i);
 		j = 0;
 		while (j < nb_char)
 		{
-			printf("%d ", map[i][j]);
 			j++;
 		}
-		printf("\n");
 		i++;
 	}
 	close(fd);
@@ -193,8 +189,8 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 	int	start_x;
 	int	start_y;
 
-	tab->inc_x = 900 / tab->nb_num;
-	tab->inc_y = 600 / tab->nb_line;
+	tab->inc_x = 600 / tab->nb_num;
+	tab->inc_y = 300 / tab->nb_line;
 	start_x = 50;
 	start_y = 50;
 	tab->x0 = start_x + ((tab->map[0][0]) * 10);
@@ -206,7 +202,7 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 		while (j < tab->nb_num - 1)
 		{
 			tab->x1 = start_x + tab->inc_x * (j + 1) + ((tab->map[i][j + 1]) * 10);
-			tab->y1 = start_y + tab->inc_y * i + ((tab->map[i][j + 1]) * 20);
+			tab->y1 = start_y + tab->inc_y * i + ((tab->map[i][j + 1]) * 20) + (15 * (j+ 1));
 			draw_line(mlx_info, tab, 8584960);
 			tab->x0 = tab->x1;
 			tab->y0 = tab->y1;
@@ -225,7 +221,7 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 		i = 0;
 		while (i < tab->nb_line - 1)
 		{
-			tab->x1 = start_x + tab->inc_x * j + ((tab->map[i + 1][j]) * 10);
+			tab->x1 = start_x + tab->inc_x * j + ((tab->map[i + 1][j]) * 10) + (15 * (i + 1));
 			tab->y1 = start_y + tab->inc_y * (i + 1) + ((tab->map[i + 1][j]) * 20);
 			draw_line(mlx_info, tab, 8584960);
 			tab->x0 = tab->x1;
