@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:53:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/22 14:39:05 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/23 14:38:58 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int		ft_nb_char(char *line)
 	i = 0;
 	while (*line)
 	{
-		if ((*line != ' ' && *(line + 1) == ' ') || (*line != ' ' && *(line + 1) == '\0'))
+		if ((*line != ' ' && *(line + 1) == ' ') ||
+				(*line != ' ' && *(line + 1) == '\0'))
 			i++;
 		line++;
 	}
@@ -78,29 +79,25 @@ int		**ft_fill_tab(int nb_line, int nb_char, char *file)
 	return (map);
 }
 
-int		**read_file(char *file)
+void	read_file(char *file, t_map_infos *tab)
 {
 	int		fd;
-	int		nb_line;
-	int		nb_char;
 	char	*line;
-	int		**map;
-	int		i;
+//	int		i;
 
-	map = NULL;
+	tab->map = NULL;
 	fd = open(file, O_RDONLY);
-	nb_line = 0;
-	nb_char = 0;
+	tab->nb_line = 0;
+	tab->nb_num = 0;
 	while (get_next_line(fd, &line))
 	{
-		if (!nb_char)
-			nb_char = ft_nb_char(line);
+		if (!(tab->nb_num))
+			tab->nb_num = ft_nb_char(line);
 		free(line);
-		nb_line++;
+		tab->nb_line++;
 	}
 	close(fd);
-	map = ft_fill_tab(nb_line, nb_char, file);
-	return (map);
+	tab->map = ft_fill_tab(tab->nb_line, tab->nb_num, file);
 }
 
 void	*initialize()
@@ -155,15 +152,14 @@ void	get_draw_infos(t_line *elem, int x0, int x1, int y0, int y1)
 	elem->shortest = ft_abs(elem->h);
 	if (elem->longest < elem->shortest)
 	{
-		elem->longest = elem->shortest;
-		elem->shortest = ft_abs(elem->w);
+		ft_swap(elem->longest, elem->shortest);
 		(elem->h < 0) ? (elem->dy2 = -1) : (elem->dy2 = 1);
 		elem->dx2 = 0;
 	}
 	elem->numerator = elem->longest / 2;
 }
 
-void	draw_line(void *mlx_ptr, void *mlx_window, int x0, int y0, int x1, int y1,
+void	draw_line(t_mlx_infos *mlx_info, int x0, int y0, int x1, int y1,
 		int color)
 {
 	t_line	*elem;
@@ -174,7 +170,7 @@ void	draw_line(void *mlx_ptr, void *mlx_window, int x0, int y0, int x1, int y1,
 	i = 0;
 	while (i <= elem->longest)
 	{
-		mlx_pixel_put(mlx_ptr, mlx_window, x0, y0, color);
+		mlx_pixel_put(mlx_info->ptr, mlx_info->window, x0, y0, color);
 		elem->numerator += elem->shortest;
 		if (elem->numerator >= elem->longest)
 		{
@@ -191,24 +187,24 @@ void	draw_line(void *mlx_ptr, void *mlx_window, int x0, int y0, int x1, int y1,
 	}
 }
 
-void	draw(void *mlx_ptr, void *mlx_window, int **map)
+void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 {
 	int	x;
 	int	y;
-	int	inc_x;
-	int	inc_y;
+//	int	inc_x;
+//	int	inc_y;
 	int	i;
 	int	j;
 
 	x = 50;
 	y = 50;
 	i = 0;
-	while (i < 5)
+	while (i < tab->nb_line)
 	{
 		j = 0;
-		while (j < 9)
+		while (j < tab->nb_num - 1)
 		{
-			draw_line(mlx_ptr, mlx_window, x, y, x + 50, 50 * (i + 1), 8584960);
+			draw_line(mlx_info, x, y, x + 50, 50 * (i + 1), 8584960);
 			x += 50;
 			j++;
 		}
@@ -219,12 +215,12 @@ void	draw(void *mlx_ptr, void *mlx_window, int **map)
 	x = 50;
 	y = 50;
 	i = 0;
-	while (i < 10)
+	while (i < tab->nb_num)
 	{
 		j = 0;
-		while (j < 4)
+		while (j < tab->nb_line - 1)
 		{
-			draw_line(mlx_ptr, mlx_window, x, y, 50 * (i + 1), y + 50, 8584960);
+			draw_line(mlx_info, x, y, 50 * (i + 1), y + 50, 8584960);
 			y += 50;
 			j++;
 		}
@@ -236,21 +232,22 @@ void	draw(void *mlx_ptr, void *mlx_window, int **map)
 
 int		main(int argc, char **argv)
 {
-	int			**map;
 	t_mlx_infos	*mlx_info;
+	t_map_infos	*tab;
 
 	mlx_info = (t_mlx_infos*)malloc(sizeof(*mlx_info));
+	tab = (t_map_infos*)malloc(sizeof(*tab));
 	if (argc != 2)
 	{
 		ft_putstr("usage: ./fdf file\n");
 		return (0);
 	}
-	map = read_file(argv[1]);
+	read_file(argv[1], tab);
 	if (!(mlx_info->ptr = initialize()))
 		return (0);
 	if (!(mlx_info->window = create_window(mlx_info->ptr)))
 		return (0);
-	draw(mlx_info->ptr, mlx_info->window, map);
+	draw(mlx_info, tab);
 	mlx_loop(mlx_info->ptr);
 	return (0);
 }

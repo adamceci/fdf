@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:00:04 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/22 14:18:17 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/23 13:17:20 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ typedef struct	s_line
 }				t_line;
 
 // struct pour la map et les x, y (draw())
+typedef struct	s_map_infos
+{
+	int			**map;
+	int			nb_line;
+	int			nb_num;
+}				t_map_infos;
 
 // Struct pour les retour des fonctions de la mlx
 typedef struct	s_mlx_infos
