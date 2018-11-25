@@ -189,12 +189,15 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 	int	start_x;
 	int	start_y;
 
-	tab->inc_x = 600 / tab->nb_num;
-	tab->inc_y = 300 / tab->nb_line;
+//	tab->inc_x = 600 / tab->nb_num;
+//	tab->inc_y = 300 / tab->nb_line;
+	tab->inc_x = 35;			//
+	tab->inc_y = 35;			//
 	start_x = 50;
-	start_y = 50;
+	start_y = 300;
 	tab->x0 = start_x + ((tab->map[0][0]) * 10);
-	tab->y0 = start_y + ((tab->map[0][0]) * 20);
+	tab->y0 = start_y + ((tab->map[0][0]) * -30);
+	/*
 	i = 0;
 	while (i < tab->nb_line)
 	{
@@ -202,27 +205,30 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 		while (j < tab->nb_num - 1)
 		{
 			tab->x1 = start_x + tab->inc_x * (j + 1) + ((tab->map[i][j + 1]) * 10);
-			tab->y1 = start_y + tab->inc_y * i + ((tab->map[i][j + 1]) * 20) + (15 * (j+ 1));
+			tab->y1 = start_y + tab->inc_y * i + ((tab->map[i][j + 1]) * -30);
 			draw_line(mlx_info, tab, 8584960);
 			tab->x0 = tab->x1;
 			tab->y0 = tab->y1;
 			j++;
 		}
+		start_x += 20;
 		tab->x0 = start_x;
 		tab->y0 = start_y + (tab->inc_y * (i + 1));
 		i++;
 	}
-
+	start_x = 50;
 	tab->x0 = start_x + ((tab->map[0][0]) * 10);
-	tab->y0 = start_y + ((tab->map[0][0]) * 20);
+	tab->y0 = start_y + ((tab->map[0][0]) * -30);
+	*/
 	j = 0;
 	while (j < tab->nb_num)
 	{
 		i = 0;
 		while (i < tab->nb_line - 1)
 		{
-			tab->x1 = start_x + tab->inc_x * j + ((tab->map[i + 1][j]) * 10) + (15 * (i + 1));
-			tab->y1 = start_y + tab->inc_y * (i + 1) + ((tab->map[i + 1][j]) * 20);
+			tab->x1 = start_x + tab->inc_x * j + ((tab->map[i + 1][j]) * 10)
+			+ (20 * (i + 1));
+			tab->y1 = start_y + tab->inc_y * (i + 1) + ((tab->map[i + 1][j]) * -30);
 			draw_line(mlx_info, tab, 8584960);
 			tab->x0 = tab->x1;
 			tab->y0 = tab->y1;
@@ -232,7 +238,9 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 		tab->y0 = start_y;
 		j++;
 	}
+	
 }
+
 
 int		main(int argc, char **argv)
 {
