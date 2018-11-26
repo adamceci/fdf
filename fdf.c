@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:53:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/23 19:30:02 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/26 17:39:01 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	*create_window(void *mlx_ptr)
 {
 	void	*mlx_window;
 
-	mlx_window = mlx_new_window(mlx_ptr, 1000, 700, "fdf");
+	mlx_window = mlx_new_window(mlx_ptr, 2000, 1400, "fdf");
 	if (mlx_window == NULL)
 	{
 		printf("failed to create a new window\n");
@@ -192,49 +192,64 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 	int	j;
 	int	start_x;
 	int	start_y;
-
-	tab->inc_x = 900 / tab->nb_num;
-	tab->inc_y = 600 / tab->nb_line;
-	start_x = 50;
-	start_y = 50;
-	tab->x0 = start_x + ((tab->map[0][0]) * 10);
-	tab->y0 = start_y + ((tab->map[0][0]) * 20);
+	int ratio;
+	
+	ratio = 5;
+	tab->inc_x = 600 / tab->nb_num;
+	tab->inc_y = 350 / tab->nb_line;
+	start_x = 150;
+	start_y = 800;
+	tab->x0 = start_x + ((tab->map[0][0]) * 0);
+	tab->y0 = start_y + ((tab->map[0][0]) * 30);
 	i = 0;
 	while (i < tab->nb_line)
 	{
 		j = 0;
 		while (j < tab->nb_num - 1)
 		{
-			tab->x1 = start_x + tab->inc_x * (j + 1) + ((tab->map[i][j + 1]) * 10);
-			tab->y1 = start_y + tab->inc_y * i + ((tab->map[i][j + 1]) * 20);
-			draw_line(mlx_info, tab, 8584960);
+			tab->x1 = start_x + tab->inc_x * (j + 1) + ((tab->map[i][j + 1]) * 0) + ratio * i;
+			tab->y1 = start_y + tab->inc_y * i - ((tab->map[i][j + 1]) * 30) - ratio * (j + 1);
+			if (tab->map[i][j] >= 10 && tab->map[i][j + 1] >= 10)
+				draw_line(mlx_info, tab, 0xFF66B2);
+			else
+				draw_line(mlx_info, tab, 0xFFCCE5);
+
 			tab->x0 = tab->x1;
 			tab->y0 = tab->y1;
 			j++;
 		}
-		tab->x0 = start_x;
-		tab->y0 = start_y + (tab->inc_y * (i + 1));
 		i++;
+		if (i < tab->nb_line)
+		{
+			tab->x0 = start_x + ratio * i + ((tab->map[i][0]) * 0);
+			tab->y0 = start_y + tab->inc_y * i + ((tab->map[i][0]) * 30);
+		}
 	}
 
-	tab->x0 = start_x + ((tab->map[0][0]) * 10);
-	tab->y0 = start_y + ((tab->map[0][0]) * 20);
+	tab->x0 = start_x + ((tab->map[0][0]) * 0);
+	tab->y0 = start_y + ((tab->map[0][0]) * 30);
 	j = 0;
 	while (j < tab->nb_num)
 	{
 		i = 0;
 		while (i < tab->nb_line - 1)
 		{
-			tab->x1 = start_x + tab->inc_x * j + ((tab->map[i + 1][j]) * 10);
-			tab->y1 = start_y + tab->inc_y * (i + 1) + ((tab->map[i + 1][j]) * 20);
-			draw_line(mlx_info, tab, 8584960);
+			tab->x1 = start_x + tab->inc_x * j + ((tab->map[i + 1][j]) * 0) + ratio * (i + 1);
+			tab->y1 = start_y + tab->inc_y * (i + 1) - ((tab->map[i + 1][j]) * 30) - ratio * j;
+			if (tab->map[i + 1][j] >= 10 && tab->map[i][j] >= 10)
+				draw_line(mlx_info, tab, 0xFF66B2);
+			else
+				draw_line(mlx_info, tab, 0xFFCCE5);
 			tab->x0 = tab->x1;
 			tab->y0 = tab->y1;
 			i++;
 		}
-		tab->x0 = start_x + (tab->inc_x * (j + 1));
-		tab->y0 = start_y;
 		j++;
+		if (j < tab->nb_num)
+		{
+			tab->x0 = start_x + (tab->inc_x * j) + ((tab->map[0][j]) * 0);
+			tab->y0 = start_y - ratio * j + ((tab->map[0][j]) * 30);
+		}
 	}
 }
 
