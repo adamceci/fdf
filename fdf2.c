@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:53:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/26 17:39:00 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/11/28 18:29:39 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,23 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 	
 }
 
+int		deal_key(int key, t_mlx_infos *mlx_info)
+{
+	void	*mlx_img;
+
+	if (key == 53)
+	{
+		mlx_clear_window(mlx_info->ptr, mlx_info->window);
+		mlx_destroy_window(mlx_info->ptr, mlx_info->window);
+		exit(0);
+	}
+	if (key == 124)
+	{
+		mlx_img = mlx_new_image(mlx_info->ptr, 0, 0);
+		mlx_put_image_to_window(mlx_info->ptr, mlx_info->window, mlx_img, 800, 1000);
+	}
+	return (0);
+}
 
 int		main(int argc, char **argv)
 {
@@ -267,6 +284,7 @@ int		main(int argc, char **argv)
 	if (!(mlx_info->window = create_window(mlx_info->ptr)))
 		return (0);
 	draw(mlx_info, tab);
+	mlx_key_hook(mlx_info->window, deal_key, mlx_info);
 	mlx_loop(mlx_info->ptr);
 	return (0);
 }
