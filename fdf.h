@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:00:04 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/23 15:08:35 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/01 14:53:12 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ typedef struct	s_map_infos
 typedef struct	s_mlx_infos
 {
 	void		*ptr;
-	void		*window;
+	void		*win;
+	void		*img;
+	char		*img_str;
 }				t_mlx_infos;
 
 #endif
