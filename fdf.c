@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:53:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/01 14:58:40 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/05 12:14:34 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,8 @@ void	draw_line(t_mlx_infos *mlx_info, t_map_infos *tab, int color)
 	i = 0;
 	while (i <= elem->longest)
 	{
-		mlx_pixel_put(mlx_info->ptr, mlx_info->win, tab->x0, tab->y0, color);
+		mlx_info->img_str[tab->y0 * 1000 + tab->x0] = color;
+		//mlx_pixel_put(mlx_info->ptr, mlx_info->win, tab->x0, tab->y0, color);
 		elem->numerator += elem->shortest;
 		if (elem->numerator >= elem->longest)
 		{
@@ -257,18 +258,38 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 
 int		deal_key(int key, t_mlx_infos *mlx_info)
 {
-	void	*mlx_img;
+	static int	i = 0;
+	static int	j = 0;
 
+	ft_putnbr(key);
+	ft_putchar('\n');
+//	if (key == 49) // space
 	if (key == 53)
 	{
+		mlx_destroy_image(mlx_info->ptr, mlx_info->img);
 		mlx_clear_window(mlx_info->ptr, mlx_info->win);
 		mlx_destroy_window(mlx_info->ptr, mlx_info->win);
 		exit(0);
 	}
+	if (key == 123)
+	{
+		i -= 10;
+		mlx_put_image_to_window(mlx_info->ptr, mlx_info->win, mlx_info->img, i, j);
+	}
 	if (key == 124)
 	{
-		mlx_img = mlx_new_image(mlx_info->ptr, 0, 0);
-		mlx_put_image_to_window(mlx_info->ptr, mlx_info->win, mlx_img, 800, 1000);
+		i += 10;
+		mlx_put_image_to_window(mlx_info->ptr, mlx_info->win, mlx_info->img, i, j);
+	}
+	if (key == 125)
+	{
+		j += 10;
+		mlx_put_image_to_window(mlx_info->ptr, mlx_info->win, mlx_info->img, i, j);
+	}
+	if (key == 126)
+	{
+		j -= 10;
+		mlx_put_image_to_window(mlx_info->ptr, mlx_info->win, mlx_info->img, i, j);
 	}
 	return (0);
 }
@@ -295,7 +316,7 @@ int		main(int argc, char **argv)
 		return (0);
 	mlx_info->img = mlx_new_image(mlx_info->ptr, 1000, 1400);
 	// return (NULL) ?? mlx_new_image
-	mlx_info->img_str = mlx_get_data_addr(mlx_info->img, &(bpp), &(s_l), &(endian));
+	mlx_info->img_str = (int*)mlx_get_data_addr(mlx_info->img, &(bpp), &(s_l), &(endian));
 	draw(mlx_info, tab);
 	mlx_key_hook(mlx_info->win, deal_key, mlx_info);
 	mlx_loop(mlx_info->ptr);

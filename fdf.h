@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:00:04 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/01 14:53:12 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/05 11:17:02 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct	s_mlx_infos
 	void		*ptr;
 	void		*win;
 	void		*img;
-	char		*img_str;
+	int			*img_str;
 }				t_mlx_infos;
 
 #endif
