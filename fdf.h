@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:00:04 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/05 11:17:02 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/07 15:15:11 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <mlx.h>
 #include "libft.h"
+#include <math.h>
 
 // Struct pour draw_line()
 typedef struct	s_line

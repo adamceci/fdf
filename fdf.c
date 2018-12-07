@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:53:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/05 12:14:34 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/07 16:42:08 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ void	draw_line(t_mlx_infos *mlx_info, t_map_infos *tab, int color)
 	}
 }
 
+
 void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 {
 	int	i;
@@ -193,8 +194,8 @@ void	draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 	int	slope;
 
 	ratio_x = 0;
-	ratio_y = -30;
-	slope = 5;
+	ratio_y = -2;
+	slope = 15;
 	tab->inc_x = 300 / tab->nb_num;
 	tab->inc_y = 150 / tab->nb_line;
 	start_x = 150;
@@ -263,7 +264,12 @@ int		deal_key(int key, t_mlx_infos *mlx_info)
 
 	ft_putnbr(key);
 	ft_putchar('\n');
-//	if (key == 49) // space
+	if (key == 49)
+	{
+		i = 0;
+		j = 0;
+		mlx_put_image_to_window(mlx_info->ptr, mlx_info->win, mlx_info->img, i, j);
+	}
 	if (key == 53)
 	{
 		mlx_destroy_image(mlx_info->ptr, mlx_info->img);
