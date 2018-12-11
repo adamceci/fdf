@@ -66,7 +66,8 @@ SRCS =	ft_memset.c			\
 		ft_bubble_sort.c	\
 		ft_sqrt.c			\
 		ft_swap.c			\
-		get_next_line.c
+		get_next_line.c		\
+		free_2d_array.c
 
 HEADER = ./includes
 

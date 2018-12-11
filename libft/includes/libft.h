@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 12:39:51 by aceciora          #+#    #+#             */
-/*   Updated: 2018/11/22 15:34:49 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/11 17:26:33 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <limits.h>
 
-# define BUFF_SIZE	10
+# define BUFF_SIZE	1000
 
 typedef struct		s_list
 {
@@ -97,5 +97,6 @@ void				ft_bubble_sort(int *tab, int size);
 int					ft_sqrt(int nb);
 void				ft_swap(int *a, int *b);
 int					get_next_line(const int fd, char **line);
+void				free_2d_array(char **array, unsigned int size);
 
 #	endif

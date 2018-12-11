@@ -6,16 +6,16 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:00:04 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/07 15:15:11 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/11 17:48:57 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include <mlx.h>
-#include "libft.h"
-#include <math.h>
+# include <mlx.h>
+# include "libft.h"
+# include <math.h>
 
 // Struct pour draw_line()
 typedef struct	s_line
@@ -30,6 +30,16 @@ typedef struct	s_line
 	int			shortest;
 	int			numerator;
 }				t_line;
+
+// Struct pour draw
+typedef struct	s_draw
+{
+	int			start_x;
+	int			start_y;
+	int			ratio_x;
+	int			ratio_y;
+	int			slope;
+}				t_draw;
 
 // struct pour la map et les x, y (draw())
 typedef struct	s_map_infos
@@ -52,6 +62,14 @@ typedef struct	s_mlx_infos
 	void		*win;
 	void		*img;
 	int			*img_str;
+	int			bpp;
+	int			s_l;
+	int			endian;
 }				t_mlx_infos;
+
+void			*initialize(void);
+void			*create_window(void *mlx_ptr);
+void			para_draw(t_mlx_infos *mlx_info, t_map_infos *tab);
+int				deal_key(int key, t_mlx_infos *mlx_info);
 
 #endif
