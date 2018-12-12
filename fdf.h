@@ -6,14 +6,14 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:00:04 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/11 17:48:57 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/12 11:43:45 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include <mlx.h>
+# include "mlx.h"
 # include "libft.h"
 # include <math.h>
 

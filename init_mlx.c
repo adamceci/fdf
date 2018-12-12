@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:42:44 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/11 17:48:56 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/12 13:09:17 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*create_window(void *mlx_ptr)
 {
 	void	*mlx_window;
 
-	mlx_window = mlx_new_window(mlx_ptr, 700, 1000, "fdf");
+	mlx_window = mlx_new_window(mlx_ptr, 2000, 1000, "fdf");
 	if (mlx_window == NULL)
 	{
 		ft_putstr("failed to create a new window\n");

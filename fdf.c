@@ -6,11 +6,13 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 12:26:08 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/11 17:48:18 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/12 15:55:07 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+#include <stdio.h>
 
 /*
 int	ft_round(double nb)
@@ -64,7 +66,7 @@ static void	draw_line(t_mlx_infos *mlx_info, t_map_infos *tab, int color)
 	i = 0;
 	while (i <= elem->longest)
 	{
-		mlx_info->img_str[tab->y0 * 700 + tab->x0] = color;
+		mlx_info->img_str[tab->y0 * 2000 + tab->x0] = color;
 		elem->numerator += elem->shortest;
 		if (elem->numerator >= elem->longest)
 		{
@@ -81,11 +83,11 @@ static void	draw_line(t_mlx_infos *mlx_info, t_map_infos *tab, int color)
 	}
 }
 
-static void	draw_plines(t_mlx_infos *mlx_info, t_map_infos *tab, t_draw *elem)
+static void	draw_hlines(t_mlx_infos *mlx_info, t_map_infos *tab, t_draw *elem)
 {
 	int		i;
 	int		j;
-	
+
 	tab->x0 = elem->start_x + ((tab->map[0][0]) * elem->ratio_x);
 	tab->y0 = elem->start_y + ((tab->map[0][0]) * elem->ratio_y);
 	i = 0;
@@ -115,51 +117,12 @@ static void	draw_plines(t_mlx_infos *mlx_info, t_map_infos *tab, t_draw *elem)
 	}
 }
 
-void	para_draw(t_mlx_infos *mlx_info, t_map_infos *tab)
+static void	draw_vlines(t_mlx_infos *mlx_info, t_map_infos *tab, t_draw *elem)
 {
 	int		i;
 	int		j;
-	t_draw	*elem;
 
-	elem = (t_draw*)malloc(sizeof(*elem));
-	// fill_elem(); --> calcul ratio_x/ratio_y/slope/start_x/start_y & tab->inc_x/tab->inc_y
-	elem->ratio_x = 0;
-	elem->ratio_y = -2;
-	elem->slope = 15;
-	tab->inc_x = 300 / tab->nb_num;
-	tab->inc_y = 150 / tab->nb_line;
-	elem->start_x = 150;
-	elem->start_y = 800;
-
-	draw_plines(mlx_info, tab, elem);
-/*	tab->x0 = elem->start_x + ((tab->map[0][0]) * elem->ratio_x);
-	tab->y0 = elem->start_y + ((tab->map[0][0]) * elem->ratio_y);
-	i = 0;
-	while (i < tab->nb_line)
-	{
-		j = 0;
-		while (j < tab->nb_num - 1)
-		{
-			tab->x1 = elem->start_x + tab->inc_x * (j + 1) +
-					tab->map[i][j + 1] * elem->ratio_x + elem->slope * i;
-			tab->y1 = elem->start_y + tab->inc_y * i +
-					tab->map[i][j + 1] * elem->ratio_y - elem->slope * (j + 1);
-			if (tab->map[i][j + 1] > 0 || tab->map[i][j] > 0)
-				draw_line(mlx_info, tab, 0xFF66B2);
-			else
-				draw_line(mlx_info, tab, 0xFFCCE5);
-			tab->x0 = tab->x1;
-			tab->y0 = tab->y1;
-			j++;
-		}
-		i++;
-		if (i < tab->nb_line)
-		{
-			tab->x0 = elem->start_x + elem->slope * i + tab->map[i][0] * elem->ratio_x;
-			tab->y0 = elem->start_y + tab->inc_y * i + tab->map[i][0] * elem->ratio_y;
-		}
-	}
-*/	tab->x0 = elem->start_x + ((tab->map[0][0]) * elem->ratio_x);
+	tab->x0 = elem->start_x + ((tab->map[0][0]) * elem->ratio_x);
 	tab->y0 = elem->start_y + ((tab->map[0][0]) * elem->ratio_y);
 	j = 0;
 	while (j < tab->nb_num)
@@ -185,7 +148,27 @@ void	para_draw(t_mlx_infos *mlx_info, t_map_infos *tab)
 			tab->x0 = elem->start_x + tab->inc_x * j + tab->map[0][j] * elem->ratio_x;
 			tab->y0 = elem->start_y - elem->slope * j + tab->map[0][j] * elem->ratio_y;
 		}
-	}
+	}m->start_y + ((tab->map[0][0]) * elem->ratio_y);
+}
+
+void	para_draw(t_mlx_infos *mlx_info, t_map_infos *tab)
+{
+	int		i;
+	int		j;
+	t_draw	*elem;
+
+	elem = (t_draw*)malloc(sizeof(*elem));
+	// fill_elem(); --> calcul ratio_x/ratio_y/slope/start_x/start_y & tab->inc_x/tab->inc_y
+	elem->ratio_x = 0;
+	elem->ratio_y = -2;
+	elem->slope = 15;
+	tab->inc_x = 300 / tab->nb_num;
+	tab->inc_y = 150 / tab->nb_line;
+	elem->start_x = 150;
+	elem->start_y = 800;
+
+	draw_hlines(mlx_info, tab, elem);
+	draw_vlines(mlx_info, tab, elem);
 	mlx_put_image_to_window(mlx_info->ptr, mlx_info->win, mlx_info->img, 0, 0);
 }
 

@@ -21,8 +21,8 @@ all: $(NAME)
 $(NAME):
 	@make re -C $(LIB)
 	@make re -C $(MLX)
-	$(CC) $(FLAGS) -c $(SRCS) $(HEADER) -I $(LIB)/includes -I $(MLX)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJS) -L $(LIB) -lft -L $(MLX) -lmlx -framework OpenGL -framework Appkit
+	$(CC) -c $(SRCS) $(HEADER) -I $(LIB)/includes -I $(MLX)
+	$(CC) -o $(NAME) $(OBJS) -L $(LIB) -lft -L $(MLX) -lmlx -framework OpenGL -framework Appkit
 
 clean:
 	@make clean -C $(LIB)

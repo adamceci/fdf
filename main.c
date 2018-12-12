@@ -6,11 +6,13 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 12:25:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/11 17:48:56 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/12 13:41:40 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+#include <stdio.h>
 
 static int	ft_nb_char(char *line)
 {
@@ -106,7 +108,7 @@ int			main(int argc, char **argv)
 	if (!(mlx_info->ptr = initialize()) ||
 		!(mlx_info->win = create_window(mlx_info->ptr)))
 		return (-1);
-	if (!(mlx_info->img = mlx_new_image(mlx_info->ptr, 700, 1000)))
+	if (!(mlx_info->img = mlx_new_image(mlx_info->ptr, 2000, 1000)))
 		return (-1);
 	mlx_info->img_str = (int*)mlx_get_data_addr(mlx_info->img, &(mlx_info->bpp),
 						&(mlx_info->s_l), &(mlx_info->endian));
