@@ -1,7 +1,6 @@
 NAME = fdf
 
 SRCS = main.c		\
-	   fdf.c		\
 	   init_mlx.c	\
 
 OBJS = $(SRCS:%.c=%.o)

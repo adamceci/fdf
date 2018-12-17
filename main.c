@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/11 12:25:55 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/12 13:41:40 by aceciora         ###   ########.fr       */
+/*   Created: 2018/12/17 12:16:26 by aceciora          #+#    #+#             */
+/*   Updated: 2018/12/17 18:45:31 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,106 +14,106 @@
 
 #include <stdio.h>
 
-static int	ft_nb_char(char *line)
+void				fill_coord(t_list_coord **list, t_map_datas *datas, int i, int j)
 {
-	int			i;
-
-	i = 0;
-	while (*line)
-	{
-		if ((*line != ' ' && *(line + 1) == ' ') ||
-				(*line != ' ' && *(line + 1) == '\0'))
-			i++;
-		line++;
-	}
-	return (i);
+	datas->ratio_x = 0;
+	datas->ratio_y = -2;
+	datas->inc_x = 200;
+	datas->inc_y = 200;
+	(*list)->coord[j].x = j * datas->inc_x + datas->tab_value * datas->ratio_x; //calculer ratio;
+	(*list)->coord[j].y = i * datas->inc_y + datas->tab_value * datas->ratio_y; //calculer ratio;
+	(*list)->coord[j].z = datas->tab_value;
+	(*list)->coord[j].i = i;
+	(*list)->coord[j].j = j;
 }
 
-static void	fill_tab(t_map_infos *tab, char *file)
+void				find_min_max(t_map_datas *datas, t_list_coord **list, int j)
 {
-	int			fd;
-	int			i;
-	int			j;
-	char		*line;
-	char		**grid;
-
-	fd = open(file, O_RDONLY);
-	i = 0;
-	while (i < tab->nb_line)
+	static int		init = 0;
+	
+	if (!init++)
 	{
-		get_next_line(fd, &line);
-		grid = ft_strsplit(line, ' ');
-		j = 0;
-		while (j < tab->nb_num)
-		{
-			tab->map[i][j] = atoi(grid[j]);
-			j++;
-		}
-		free_2d_array(grid, tab->nb_num);
-		free(line);
-		i++;
+		datas->min_x = (*list)->coord[j].x;
+		datas->max_x = (*list)->coord[j].x;
+		datas->min_y = (*list)->coord[j].y;
+		datas->max_y = (*list)->coord[j].y;
 	}
-	close(fd);
+	if (datas->min_x > (*list)->coord[j].x)
+		datas->min_x = (*list)->coord[j].x;
+	else if (datas->max_x < (*list)->coord[j].x)
+		datas->max_x = (*list)->coord[j].x;
+	if (datas->min_y > (*list)->coord[j].y)
+		datas->min_y = (*list)->coord[j].y;
+	else if (datas->max_y < (*list)->coord[j].y)
+		datas->max_y = (*list)->coord[j].y;
 }
 
-static void	allocate_tab(t_map_infos *tab)
+void				fill_list_coord(char *line, int row, t_list_coord **list, t_map_datas *datas)
 {
-	int			i;
+	char			**tab_split;
+	int				*tab;
+	int				j;
 
-	if (!(tab->map = (int**)malloc(sizeof(*tab->map) * tab->nb_line)))
+	tab_split = ft_strsplit(line, ' '); // --> free + proteger malloc
+	j = 0;
+	while (tab_split[j])
+		j++;
+	if (!(tab = (int*)malloc(sizeof(*tab) * j)))
+		exit(-1); // --> look for perror strerror
+	if (!((*list)->coord = (t_coord*)malloc(sizeof(t_coord) * j)))
 		exit(-1);
-	i = 0;
-	while (i < tab->nb_line)
+	j = 0;
+	while (tab_split[j])
 	{
-		if (!(tab->map[i] = (int*)malloc(sizeof(**tab->map) * tab->nb_num)))
-			exit(-1);
-		i++;
+		tab[j] = ft_atoi(tab_split[j]);
+		free(tab_split[j]);
+		fill_coord(list, datas, row, j);
+		find_min_max(datas, list, j);
+		j++;
 	}
+	free(tab_split);
+	free(tab);
 }
 
-static void	read_file(char *file, t_map_infos *tab)
+void				read_map(char *file, t_map_datas *datas)
 {
-	int			fd;
-	char		*line;
+	int				fd;
+	int				row;
+	char			*line;
+	t_list_coord	*list;
 
-	tab->map = NULL;
+	if (!(list = (t_list_coord*)malloc(sizeof(*list))))
+		exit(-1);
 	fd = open(file, O_RDONLY);
-	tab->nb_line = 0;
-	tab->nb_num = 0;
-	while (get_next_line(fd, &line))
+	row = 0;
+	while(get_next_line(fd, &line))
 	{
-		if (!(tab->nb_num))
-			tab->nb_num = ft_nb_char(line);
+		fill_list_coord(line, row, &list, datas);
 		free(line);
-		tab->nb_line++;
+		if (!(list->next = (t_list_coord*)malloc(sizeof(*list))))
+			exit(-1);
+		list = list->next;
+		row++;
 	}
-	close(fd);
-	allocate_tab(tab);
-	fill_tab(tab, file);
 }
 
-int			main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
-	t_mlx_infos	*mlx_info;
-	t_map_infos	*tab;
+	t_map_datas	*datas;
+	t_mlx_infos *infos;
 
-	mlx_info = (t_mlx_infos*)malloc(sizeof(*mlx_info));
-	tab = (t_map_infos*)malloc(sizeof(*tab));
-	if (argc != 2)
-	{
-		ft_putstr("usage: ./fdf file\n");
-		return (-1);
-	}
-	read_file(argv[1], tab);
-	if (!(mlx_info->ptr = initialize()) ||
-		!(mlx_info->win = create_window(mlx_info->ptr)))
-		return (-1);
-	if (!(mlx_info->img = mlx_new_image(mlx_info->ptr, 2000, 1000)))
-		return (-1);
-	mlx_info->img_str = (int*)mlx_get_data_addr(mlx_info->img, &(mlx_info->bpp),
-						&(mlx_info->s_l), &(mlx_info->endian));
-	para_draw(mlx_info, tab);
-	mlx_key_hook(mlx_info->win, deal_key, mlx_info);
-	mlx_loop(mlx_info->ptr);
+	if (!(datas = (t_map_datas*)malloc(sizeof(*datas))))
+		exit(-1);
+	if (argc == 2)
+		read_map(argv[1], datas);
+	if (!(infos = (t_mlx_infos*)malloc(sizeof(*infos))))
+		exit(-1);
+	get_win_size(infos, datas);
+	initialize(infos);
+	create_window(infos);
+	mlx_loop(infos->ptr);
+//	if (!(infos->img = mlx_new_image(infos->ptr, 2000, 1000)))
+//		exit(-1);
+//	infos->img_str = (int*)mlx_get_data_addr(infos->img, &(infos->bpp), &(infos->s_l), &(infos->endian));
 	return (0);
 }

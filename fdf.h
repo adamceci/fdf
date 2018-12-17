@@ -5,71 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/15 13:00:04 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/12 11:43:45 by aceciora         ###   ########.fr       */
+/*   Created: 2018/12/17 12:14:42 by aceciora          #+#    #+#             */
+/*   Updated: 2018/12/17 18:40:22 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "mlx.h"
-# include "libft.h"
-# include <math.h>
+#include "libft.h"
+#include "mlx.h"
 
-// Struct pour draw_line()
-typedef struct	s_line
+typedef struct			s_list_coord
 {
-	int			w;
-	int			h;
-	int			dx1;
-	int			dx2;
-	int			dy1;
-	int			dy2;
-	int			longest;
-	int			shortest;
-	int			numerator;
-}				t_line;
+	struct s_coord		*coord;
+	struct s_list_coord	*next;
+}						t_list_coord;
 
-// Struct pour draw
-typedef struct	s_draw
+typedef struct			s_coord
 {
-	int			start_x;
-	int			start_y;
-	int			ratio_x;
-	int			ratio_y;
-	int			slope;
-}				t_draw;
+	int					x;
+	int					y;
+	int					z;
+	int					i;
+	int					j;
+}						t_coord;
 
-// struct pour la map et les x, y (draw())
-typedef struct	s_map_infos
+typedef struct			s_map_datas
 {
-	int			**map;
-	int			nb_line;
-	int			nb_num;
-	int			x0;
-	int			y0;
-	int			x1;
-	int			y1;
-	int			inc_x;
-	int			inc_y;
-}				t_map_infos;
+	int					start_x;
+	int					start_y;
+	int					inc_x;
+	int					inc_y;
+	int					min_x; // --> OK
+	int					min_y; // --> OK
+	int					max_x; // --> OK
+	int					max_y; // --> OK
+//	int					tot_cols;
+//	int					tot_lines;
+	int					ratio_x;
+	int					ratio_y;
+	int					tab_value;
+}						t_map_datas;
 
-// Struct pour les retour des fonctions de la mlx
-typedef struct	s_mlx_infos
+typedef struct			s_mlx_infos
 {
-	void		*ptr;
-	void		*win;
-	void		*img;
-	int			*img_str;
-	int			bpp;
-	int			s_l;
-	int			endian;
-}				t_mlx_infos;
+	int					win_w;
+	int					win_h;
+	void				*ptr;
+	void				*win;
+	void				*img;
+	int					*img_str;
+	int					bpp;
+	int					s_l;
+	int					endian;
+}						t_mlx_infos;
 
-void			*initialize(void);
-void			*create_window(void *mlx_ptr);
-void			para_draw(t_mlx_infos *mlx_info, t_map_infos *tab);
-int				deal_key(int key, t_mlx_infos *mlx_info);
+void					get_win_size(t_mlx_infos *infos, t_map_datas *datas);
+void					initialize(t_mlx_infos *infos);
+void					create_window(t_mlx_infos *infos);
 
 #endif
