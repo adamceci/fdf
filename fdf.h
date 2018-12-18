@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 12:14:42 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/17 18:40:22 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/18 15:25:59 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct			s_map_datas
 	int					min_y; // --> OK
 	int					max_x; // --> OK
 	int					max_y; // --> OK
-//	int					tot_cols;
-//	int					tot_lines;
+	int					tot_cols;
+	int					tot_rows;
 	int					ratio_x;
 	int					ratio_y;
 	int					tab_value;
