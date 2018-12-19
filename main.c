@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 12:16:26 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/18 15:26:03 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/19 13:54:53 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	fill_coord(t_list_coord **list, t_map_datas *datas, int i, int j)
 	(*list)->coord[j].z = datas->tab_value;
 	(*list)->coord[j].i = i;
 	(*list)->coord[j].j = j;
+
 }
 
 static void	find_min_max(t_map_datas *datas, t_list_coord **list, int j)
@@ -48,7 +49,7 @@ static void	find_min_max(t_map_datas *datas, t_list_coord **list, int j)
 		datas->max_y = (*list)->coord[j].y;
 }
 
-static void	fill_list_coord(char *line, int row, t_list_coord **list,
+static void	fill_list_coord(char *line, int row, t_list_coord *list,
 							t_map_datas *datas)
 {
 	char			**tab_split;
@@ -62,7 +63,7 @@ static void	fill_list_coord(char *line, int row, t_list_coord **list,
 		j++;
 	if (!(tab = (int*)malloc(sizeof(*tab) * j)))
 		exit(-1); // --> look for perror strerror
-	if (!((*list)->coord = (t_coord*)malloc(sizeof(t_coord) * j)))
+	if (!((list)->coord = (t_coord*)malloc(sizeof(t_coord) * j)))
 		exit(-1);
 	if (!cpt++)
 		datas->tot_cols = j;
@@ -70,17 +71,20 @@ static void	fill_list_coord(char *line, int row, t_list_coord **list,
 	while (tab_split[j])
 	{
 		tab[j] = ft_atoi(tab_split[j]);
+		datas->tab_value = tab[j];
 		free(tab_split[j]);
-		fill_coord(list, datas, row, j);
-		find_min_max(datas, list, j);
+		fill_coord(&list, datas, row, j);
+		find_min_max(datas, &list, j);
 		j++;
 	}
+//	printf("min : %d, max : %d\n", datas->min_y, datas->max_y);
 	free(tab_split);
 	free(tab);
 }
 
 static void	read_map(char *file, t_list_coord **list, t_map_datas *datas)
 {
+	t_list_coord	*current;
 	int				fd;
 	int				row;
 	char			*line;
@@ -88,6 +92,7 @@ static void	read_map(char *file, t_list_coord **list, t_map_datas *datas)
 
 	if (!(*list = (t_list_coord*)malloc(sizeof(**list))))
 		exit(-1);
+	current = *list;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		exit (-1);
@@ -97,14 +102,14 @@ static void	read_map(char *file, t_list_coord **list, t_map_datas *datas)
 	{
 		if (gnl < 0)
 			exit(-1);
-		fill_list_coord(line, row, list, datas);
-	printf("(%d, %d)\n", (*list)->coord[0].x, (*list)->coord[0].y);
+		fill_list_coord(line, row, current, datas);
 		free(line);
-		if (!((*list)->next = (t_list_coord*)malloc(sizeof(**list))))
+		if (!(current->next = (t_list_coord*)malloc(sizeof(**list))))
 			exit(-1);
-		*list = (*list)->next;
+		current = current->next;
 		row++;
 	}
+	current = NULL;
 	datas->tot_rows = row;
 }
 
@@ -114,17 +119,14 @@ int			main(int argc, char **argv)
 	t_map_datas		*datas;
 	t_mlx_infos		*infos;
 
-//	if (!(list = (t_list_coord*)malloc(sizeof(*list))))
-//		exit(-1);
+	list = NULL;
 	if (!(datas = (t_map_datas*)malloc(sizeof(*datas))))
 		exit(-1);
 	if (argc == 2)
 		read_map(argv[1], &list, datas);
 	if (!(infos = (t_mlx_infos*)malloc(sizeof(*infos))))
 		exit(-1);
-	printf("hey\n");
 	printf("(%d, %d)\n", list->coord[0].x, list->coord[0].y);
-	printf("hey\n");
 	get_win_size(infos, datas);
 	initialize(infos);
 	create_window(infos);

@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 18:04:12 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/18 15:26:04 by aceciora         ###   ########.fr       */
+/*   Updated: 2018/12/19 13:54:51 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,23 @@
 
 void	get_win_size(t_mlx_infos *infos, t_map_datas *datas)
 {
+	datas->mult = 1.0;
 	infos->win_w = datas->max_x - datas->min_x + 100;
 	infos->win_h = datas->max_y - datas->min_y + 100;
 	if (infos->win_w > 1000)
 		infos->win_w = 1000;
 	if (infos->win_h > 800)
+	{
+		datas->mult = 100.0 / (datas->max_y - datas->min_y);
 		infos->win_h = 800;
+	}
 	if (infos->win_w < 500)
 		infos->win_w = 500;
 	if (infos->win_h < 600)
 		infos->win_h = 600;
 	datas->inc_x = (infos->win_w - 100) / datas->tot_cols;
-	datas->inc_y = (infos->win_h - 100) / datas->tot_rows;
-	printf("%d, %d\n", infos->win_w, infos->win_h);
-	printf("%d, %d\n", datas->inc_x, datas->inc_y);
+	datas->inc_y = ((infos->win_h - 100) / datas->tot_rows) * datas->mult;
+	datas->ratio_y *= datas->mult;
 }
 
 void	initialize(t_mlx_infos *infos)
