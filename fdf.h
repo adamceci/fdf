@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 12:14:42 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/19 13:54:55 by aceciora         ###   ########.fr       */
+/*   Created: 2019/01/02 14:47:22 by aceciora          #+#    #+#             */
+/*   Updated: 2019/01/02 16:48:02 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,15 @@ typedef struct			s_map_datas
 	int					tot_rows;
 	double				ratio_x;
 	double				ratio_y;
-	double				mult;
+//	double				multx;
+	double				multy;
 	int					tab_value;
 }						t_map_datas;
 
 typedef struct			s_mlx_infos
 {
-	int					win_w;
-	int					win_h;
+	double				win_w;
+	double				win_h;
 	void				*ptr;
 	void				*win;
 	void				*img;
@@ -62,8 +63,22 @@ typedef struct			s_mlx_infos
 	int					endian;
 }						t_mlx_infos;
 
+typedef struct			s_draw
+{
+	int					w;
+	int					h;
+	int					dx1;
+	int					dx2;
+	int					dy1;
+	int					dy2;
+	int					longest;
+	int					shortest;
+	int					numerator;
+}						t_draw;
+
 void					get_win_size(t_mlx_infos *infos, t_map_datas *datas);
 void					initialize(t_mlx_infos *infos);
 void					create_window(t_mlx_infos *infos);
+void					modif_coord(t_list_coord *list, t_map_datas *datas);
 
 #endif

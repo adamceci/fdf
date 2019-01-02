@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:37:03 by aceciora          #+#    #+#             */
-/*   Updated: 2018/12/18 15:26:06 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/01/02 17:11:33 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	ft_abs(int nb)
 	return (-nb);
 }
 
-static void	get_draw_infos(t_line *elem, t_map_infos *tab)
+static void	get_draw_infos(t_list_coord *list, t_line *elem)
 {
-	elem->w = tab->x1 - tab->x0;
+	elem->w = list->coord[j + 1].x - list->coord[j].x;
 	elem->h = tab->y1 - tab->y0;
 	if (elem->w < 0)
 		elem->dx1 = -1;
@@ -47,13 +47,13 @@ static void	get_draw_infos(t_line *elem, t_map_infos *tab)
 	elem->numerator = elem->longest / 2;
 }
 
-static void	draw_line(t_mlx_infos *mlx_info, t_map_infos *tab, int color)
+static void	draw_line(t_list_coord *list, t_map_datas *datas, t_mlx_infos *infos, int color)
 {
-	t_line	*elem;
-	int	i;
+	t_draw	*elem;
+	int		i;
 
 	elem = (t_line*)malloc(sizeof(*elem));
-	get_draw_infos(elem, tab);
+	get_draw_infos(list, elem);
 	i = 0;
 	while (i <= elem->longest)
 	{
@@ -67,9 +67,16 @@ static void	draw_line(t_mlx_infos *mlx_info, t_map_infos *tab, int color)
 		}
 		else
 		{
-			tab->x0 += elem->dx2;
+			list->coord[j].x += elem->dx2;
 			tab->y0 += elem->dy2;
 		}
 		i++;
 	}
+}
+
+void	draw(t_list_coord *list, t_map_datas *datas, t_mlx_infos *infos)
+{
+
+	color = 0xFFFFFF;
+	draw_line(list, datas, infos, color);
 }
