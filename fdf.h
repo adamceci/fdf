@@ -5,80 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/02 14:47:22 by aceciora          #+#    #+#             */
-/*   Updated: 2019/01/02 16:48:02 by aceciora         ###   ########.fr       */
+/*   Created: 2019/01/30 12:55:45 by aceciora          #+#    #+#             */
+/*   Updated: 2019/02/13 16:33:39 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include <stdio.h>
 
-#include "libft.h"
 #include "mlx.h"
+#include "libft.h"
 
-typedef struct			s_list_coord
+typedef struct		s_list_c
 {
-	struct s_coord		*coord;
-	struct s_list_coord	*next;
-}						t_list_coord;
+	struct s_coord	*coord;
+	size_t			content_size;
+	struct s_list_c	*next;
+}					t_list_c;
 
-typedef struct			s_coord
+typedef struct	s_coord
 {
-	int					x;
-	int					y;
-	int					z;
-	int					i;
-	int					j;
-}						t_coord;
+	int			i;
+	int			j;
+	int			x;
+	int			y;
+	int			z;
+}				t_coord;
 
-typedef struct			s_map_datas
+typedef struct	s_data
 {
-	int					start_x;
-	int					start_y;
-	int					inc_x;
-	int					inc_y;
-	int					min_x; // --> OK
-	int					min_y; // --> OK
-	int					max_x; // --> OK
-	int					max_y; // --> OK
-	int					tot_cols;
-	int					tot_rows;
-	double				ratio_x;
-	double				ratio_y;
-//	double				multx;
-	double				multy;
-	int					tab_value;
-}						t_map_datas;
+	int			min_x;
+	int			max_x;
+	int			min_y;
+	int			max_y;
+	int			c_min_x;
+	int			c_max_x;
+	int			r_min_y;
+	int			r_max_y;
+	int			cols;
+	int			rows;
+	double		multx;
+	double		multy;
+}				t_data;
 
-typedef struct			s_mlx_infos
+typedef struct	s_mlx
 {
-	double				win_w;
-	double				win_h;
-	void				*ptr;
-	void				*win;
-	void				*img;
-	int					*img_str;
-	int					bpp;
-	int					s_l;
-	int					endian;
-}						t_mlx_infos;
+	void		*ptr;
+	void		*win;
+	int			win_h;
+	int			win_w;
+}				t_mlx;
 
-typedef struct			s_draw
+typedef struct	s_bresen
 {
-	int					w;
-	int					h;
-	int					dx1;
-	int					dx2;
-	int					dy1;
-	int					dy2;
-	int					longest;
-	int					shortest;
-	int					numerator;
-}						t_draw;
+	int			w;
+	int			h;
+	int			dx1;
+	int			dx2;
+	int			dy1;
+	int			dy2;
+	int			longest;
+	int			shortest;
+	int			numerator;
+}				t_bresen;
 
-void					get_win_size(t_mlx_infos *infos, t_map_datas *datas);
-void					initialize(t_mlx_infos *infos);
-void					create_window(t_mlx_infos *infos);
-void					modif_coord(t_list_coord *list, t_map_datas *datas);
-
-#endif
+t_list_c		*ft_listnew(t_coord *coord, size_t content_size);
+void			ft_listappend(t_list_c *lst, t_list_c *new);

@@ -1,7 +1,8 @@
 NAME = fdf
 
-SRCS = main.c		\
-	   init_mlx.c	\
+SRCS = main.c			\
+	   ft_listnew.c		\
+	   ft_listappend.c	\
 
 OBJS = $(SRCS:%.c=%.o)
 

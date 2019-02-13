@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_listappend.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/25 15:00:01 by aceciora          #+#    #+#             */
-/*   Updated: 2019/01/30 13:19:35 by aceciora         ###   ########.fr       */
+/*   Created: 2019/02/03 16:29:34 by aceciora          #+#    #+#             */
+/*   Updated: 2019/02/03 16:31:40 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-void		*ft_memalloc(size_t size)
+void	ft_listappend(t_list_c *lst, t_list_c *new)
 {
-	void	*memory;
+	t_list_c	*current;
 
-	memory = malloc(size);
-	if (memory)
-		return (ft_memset(memory, 0, size));
-	return (NULL);
+	if (lst && new)
+	{
+		current = lst;
+		while (current->next)
+			current = current->next;
+		current->next = new;
+		new->next = NULL;
+	}
 }

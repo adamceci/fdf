@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_listnew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/04 14:50:40 by aceciora          #+#    #+#             */
-/*   Updated: 2019/01/30 13:20:18 by aceciora         ###   ########.fr       */
+/*   Created: 2019/02/03 16:26:10 by aceciora          #+#    #+#             */
+/*   Updated: 2019/02/04 18:44:51 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-t_list		*ft_lstnew(void const *content, size_t content_size)
+t_list_c		*ft_listnew(t_coord *coord, size_t content_size)
 {
-	t_list	*new;
+	t_list_c	*new;
 
-	new = (t_list*)malloc(sizeof(*new));
+	new = (t_list_c*)malloc(sizeof(*new));
 	if (!new)
 		return (NULL);
-	if (content == NULL)
+	if (coord == NULL)
 	{
-		new->content = NULL;
+		new->coord = NULL;
 		new->content_size = 0;
 	}
 	else
 	{
-		new->content = ft_memalloc(content_size);
-		if (!new->content)
-			return (NULL);
-		ft_memcpy(new->content, content, content_size);
+		new->coord = coord;
+		ft_memcpy(new->coord, coord, content_size);
 		new->content_size = content_size;
 	}
 	new->next = NULL;
