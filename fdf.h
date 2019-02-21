@@ -6,12 +6,13 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 12:55:45 by aceciora          #+#    #+#             */
-/*   Updated: 2019/02/13 16:33:39 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/02/21 17:24:02 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
+#include <math.h>
 #include "mlx.h"
 #include "libft.h"
 
@@ -20,6 +21,32 @@ typedef struct		s_list_c
 	struct s_coord	*coord;
 	size_t			content_size;
 	struct s_list_c	*next;
+
+	int			min_x;
+	int			max_x;
+	int			min_y;
+	int			max_y;
+	int			cols;
+	int			rows;
+	double		multx;
+	double		multy;
+	int			min_z;
+	int			max_z;
+	int			altitude;
+	int			color;
+	double		zoom;
+	int			addx;
+	int			addy;
+
+	void		*ptr;
+	void		*win;
+	int			win_h;
+	int			win_w;
+	void		*img;
+	int			*img_str;
+	int			bpp;
+	int			s_l;
+	int			endian;
 }					t_list_c;
 
 typedef struct	s_coord
@@ -31,32 +58,12 @@ typedef struct	s_coord
 	int			z;
 }				t_coord;
 
-typedef struct	s_data
-{
-	int			min_x;
-	int			max_x;
-	int			min_y;
-	int			max_y;
-	int			c_min_x;
-	int			c_max_x;
-	int			r_min_y;
-	int			r_max_y;
-	int			cols;
-	int			rows;
-	double		multx;
-	double		multy;
-}				t_data;
-
-typedef struct	s_mlx
-{
-	void		*ptr;
-	void		*win;
-	int			win_h;
-	int			win_w;
-}				t_mlx;
-
 typedef struct	s_bresen
 {
+	int			x1;
+	int			x2;
+	int			y1;
+	int			y2;
 	int			w;
 	int			h;
 	int			dx1;
