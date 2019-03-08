@@ -6,15 +6,21 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 12:55:45 by aceciora          #+#    #+#             */
-/*   Updated: 2019/02/21 17:24:02 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/08 15:45:31 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef FDF_H
+# define FDF_H
 
-#include <math.h>
-#include "mlx.h"
-#include "libft.h"
+# include <stdio.h>
+
+# include <math.h>
+# include "mlx.h"
+# include "libft.h"
+# include "keys.h"
+
+# define MARGIN 100
 
 typedef struct		s_list_c
 {
@@ -26,14 +32,23 @@ typedef struct		s_list_c
 	int			max_x;
 	int			min_y;
 	int			max_y;
+	
 	int			cols;
 	int			rows;
+	
 	double		multx;
 	double		multy;
+	
 	int			min_z;
 	int			max_z;
-	int			altitude;
+	double		altitude;
+	
+	double		r;
+	double		g;
+	double		b;
 	int			color;
+	double		p;
+	
 	double		zoom;
 	int			addx;
 	int			addy;
@@ -77,3 +92,5 @@ typedef struct	s_bresen
 
 t_list_c		*ft_listnew(t_coord *coord, size_t content_size);
 void			ft_listappend(t_list_c *lst, t_list_c *new);
+
+#endif

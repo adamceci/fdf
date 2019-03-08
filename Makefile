@@ -10,7 +10,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-HEADER = fdf.h
+HEADER = fdf.h keys.h
 
 LIB = ./libft
 
