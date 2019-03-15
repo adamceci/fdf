@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 12:03:27 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/08 20:32:56 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/11 15:00:43 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	min_max(t_list_c *head, int j)
 		current = current->next;
 	}
 	head->rows = i;
-	printf("min x = %d, max x = %d, min y = %d, max y = %d\n", head->min_x, head->max_x, head->min_y, head->max_y);
+//	printf("min x = %d, max x = %d, min y = %d, max y = %d\n", head->min_x, head->max_x, head->min_y, head->max_y);
 }
 
 t_list_c		*fill_list(t_list_c *head, int fd)
@@ -176,11 +176,11 @@ void	calc_points(t_list_c *head)
 	double		margin;
 
 	min = ft_round(head->min_y * head->multy);
-	printf("min = %d\n", min);
+//	printf("min = %d\n", min);
 	margin = (head->win_w - ((head->max_x - head->min_x) * head->multx * (head->zoom / 10))) / 2;
 //	margin = 50 - ((head->zoom - 10.0) * head->multx);
-	printf("width = %d\n", head->win_w);
-	printf("margin = %f\n", margin);
+//	printf("width = %d\n", head->win_w);
+//	printf("margin = %f\n", margin);
 	i = 0;
 	current = head;
 	while (current)
@@ -193,6 +193,9 @@ void	calc_points(t_list_c *head)
 				current->coord[j].y = ft_round(head->multy * (head->altitude * current->coord[j].z + i) * head->zoom + margin) + head->addy;
 			else
 				current->coord[j].y = ft_round(head->multy * ((head->altitude * current->coord[j].z) + i) * head->zoom + margin) + abs(min) + head->addy;
+			current->coord[j].x = (current->coord[j].x + current->coord[j].y) * cos(0.523599);
+//			current->coord[j].y = current->coord[j].z + (current->coord[j].x + current->coord[j].y) * sin(0.523599);
+
 //			printf("(%d, %d)\n", current->coord[j].x, current->coord[j].y);
 			j++;
 		}
