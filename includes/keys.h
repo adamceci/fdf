@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 15:23:52 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/08 16:46:45 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/18 19:02:52 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 # define UP_ARROW		126
 # define U				32
 # define I				34
+# define X_ROT_L		84
+# define X_ROT_R		91
+# define Y_ROT_U		86
+# define Y_ROT_D		88
+# define Z_ROT_L		75
+# define Z_ROT_R		67
+# define P				35
 # define SPACE			49
 # define ESC			53
 # define SCROLL_UP		5

@@ -6,7 +6,7 @@
 #    By: aceciora <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/14 17:31:41 by aceciora          #+#    #+#              #
-#    Updated: 2019/03/15 16:28:54 by aceciora         ###   ########.fr        #
+#    Updated: 2019/03/18 16:45:00 by aceciora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,12 @@ SRCS_LIST = main2.c			\
 	   		modif_stack.c	\
 	   		utils.c			\
 	   		init.c			\
-	   		draw.c
+	   		draw.c			\
+	   		rotate.c		\
+	   		bresenham.c		\
+	   		events.c		\
+	   		events_list.c	\
+	   		events_list2.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
 
 OBJS_DIR = objects/
