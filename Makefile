@@ -6,7 +6,7 @@
 #    By: aceciora <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/14 17:31:41 by aceciora          #+#    #+#              #
-#    Updated: 2019/03/19 15:22:10 by aceciora         ###   ########.fr        #
+#    Updated: 2019/03/19 17:53:03 by aceciora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,12 @@ MLX = $(MLX_DIR)libmlx.a
 MLX_HEADERS = $(MLX_DIR)
 
 HEADERS_DIR = ./includes/
-HEADERS_LIST = fdf2.h\
+HEADERS_LIST = fdf.h\
 			   keys.h
 HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LIST))
 
 SRCS_DIR = ./sources/
-SRCS_LIST = main2.c					\
+SRCS_LIST = main.c					\
 	   		read_map.c				\
 	   		array.c					\
 	   		modif_stack.c			\

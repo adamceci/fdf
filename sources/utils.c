@@ -6,11 +6,11 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:10:57 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/18 18:28:06 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:52:47 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf2.h"
+#include "fdf.h"
 
 void	free_list(t_points **head)
 {

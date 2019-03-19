@@ -6,11 +6,11 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:00:05 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 13:44:10 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:52:19 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf2.h"
+#include "fdf.h"
 #include "keys.h"
 
 void	zoom(int key, t_fdf *fdf)

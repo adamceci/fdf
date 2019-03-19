@@ -6,11 +6,11 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 15:13:20 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 15:25:56 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:51:59 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf2.h"
+#include "fdf.h"
 
 void	background_color(t_fdf *fdf)
 {

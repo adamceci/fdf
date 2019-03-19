@@ -6,11 +6,11 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 14:50:56 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/18 18:01:33 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:52:37 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf2.h"
+#include "fdf.h"
 
 static void	fill_coord(t_points **head, char *line, t_fdf *fdf)
 {

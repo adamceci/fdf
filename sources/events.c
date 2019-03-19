@@ -6,11 +6,11 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:36:39 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 14:23:29 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:52:14 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf2.h"
+#include "fdf.h"
 #include "keys.h"
 
 static void	redraw(t_fdf *fdf)

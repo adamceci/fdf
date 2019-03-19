@@ -6,11 +6,11 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:02:43 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/12 15:54:35 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:52:34 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf2.h"
+#include "fdf.h"
 
 void	lst_push(t_points **head, t_points *current)
 {

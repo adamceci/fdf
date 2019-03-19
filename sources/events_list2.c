@@ -6,11 +6,11 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 16:40:24 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/18 19:02:54 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:52:23 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf2.h"
+#include "fdf.h"
 #include "keys.h"
 
 void	rotate_x(int key, t_fdf *fdf)

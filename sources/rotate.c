@@ -6,11 +6,11 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:17:19 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/18 14:34:45 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:52:42 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf2.h"
+#include "fdf.h"
 
 void	rotate_x_axis(int *y, int *z, double x_angle)
 {

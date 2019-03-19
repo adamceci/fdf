@@ -6,11 +6,11 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 15:21:05 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 15:20:05 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:52:09 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf2.h"
+#include "fdf.h"
 
 static void	iso(int *x, int *y, int z)
 {
@@ -40,6 +40,51 @@ t_points	projection(t_points p, t_fdf *fdf)
 	return (p);
 }
 
+static double	get_percent(int z, int z_range)
+{
+	double percent;
+
+	if (z_range == 0)
+		percent = 1.0;
+//	else if(cur_z > next_z)
+//		percent = (next_z + cur_z) / 2.0 / z_range;
+//	else if (cur_z < next_z)
+//		percent = (cur_z + next_z) / 2.0 / z_range;
+	else
+		percent = (double)z / z_range;
+	return (percent);
+}
+
+static int		get_color(int z, int z_range)
+{
+	int		color;
+	double	percent;
+
+	color = 0xffe5e5;
+	percent = get_percent(z, z_range);
+	if (percent < 0.1)
+		color = 0xffc5c5;
+	else if (percent < 0.2)
+		color = 0xffa5a5;
+	else if (percent < 0.3)
+		color = 0xff8585;
+	else if (percent < 0.4)
+		color = 0xff7575;
+	else if (percent < 0.5)
+		color = 0xff7070;
+	else if (percent < 0.6)
+		color = 0xff6565;
+	else if (percent < 0.7)
+		color = 0xff6060;
+	else if (percent < 0.8)
+		color = 0xff5252;
+	else if (percent < 0.9)
+		color = 0xff4545;
+	else if (percent <= 1.0)
+		color = 0xff0000;
+	return (color);
+}
+
 t_points	new_point(int x, int y, t_map *map)
 {
 	t_points	p;
@@ -49,6 +94,7 @@ t_points	new_point(int x, int y, t_map *map)
 	p.x = x;
 	p.y = y;
 	p.z = map->coords_arr[index];
+	p.color = get_color(p.z, map->z_range);
 	return (p);
 }
 

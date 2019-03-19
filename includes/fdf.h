@@ -6,12 +6,12 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 10:57:49 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 15:21:16 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 17:51:11 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF2_H
-# define FDF2_H
+#ifndef FDF_H
+# define FDF_H
 
 #include <stdio.h>
 #include <errno.h>
@@ -37,7 +37,7 @@ typedef struct	s_points
 	int				y;
 	int				z;
 	struct s_points	*next;
-//	int				color;
+	int				color;
 }					t_points;
 
 typedef struct		s_camera
@@ -61,7 +61,7 @@ typedef struct		s_map
 //	int				*colors_arr;
 //	int				z_min;
 //	int				z_max;
-//	int				z_range;
+	int				z_range;
 }					t_map;
 
 typedef struct		s_mouse
