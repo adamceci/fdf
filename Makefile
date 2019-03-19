@@ -6,7 +6,7 @@
 #    By: aceciora <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/14 17:31:41 by aceciora          #+#    #+#              #
-#    Updated: 2019/03/18 16:45:00 by aceciora         ###   ########.fr        #
+#    Updated: 2019/03/19 15:22:10 by aceciora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,18 +32,19 @@ HEADERS_LIST = fdf2.h\
 HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LIST))
 
 SRCS_DIR = ./sources/
-SRCS_LIST = main2.c			\
-	   		read_map.c		\
-	   		array.c			\
-	   		modif_stack.c	\
-	   		utils.c			\
-	   		init.c			\
-	   		draw.c			\
-	   		rotate.c		\
-	   		bresenham.c		\
-	   		events.c		\
-	   		events_list.c	\
-	   		events_list2.c
+SRCS_LIST = main2.c					\
+	   		read_map.c				\
+	   		array.c					\
+	   		modif_stack.c			\
+	   		utils.c					\
+	   		init.c					\
+	   		draw.c					\
+	   		rotate.c				\
+	   		bresenham.c				\
+	   		events.c				\
+	   		events_list.c			\
+	   		events_list2.c			\
+	   		background_and_menu.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
 
 OBJS_DIR = objects/

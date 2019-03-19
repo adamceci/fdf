@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 10:57:47 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/18 19:02:53 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 14:21:30 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	lst_to_array(&head, fdf);
 	init_camera(fdf);
 	init_mlx(fdf);
-
+	init_mouse(fdf);
 	draw(fdf);
 	manage_events(fdf);
 	mlx_loop(fdf->mlx_ptr);

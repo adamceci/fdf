@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:36:39 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/18 19:02:56 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 14:23:29 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	redraw(t_fdf *fdf)
 	fdf->mlx_data_addr = (int*)mlx_get_data_addr(fdf->mlx_img, &(fdf->bpp),
 											&(fdf->s_l), &(fdf->endian));
 	draw(fdf);
-	mlx_put_image_to_window(fdf->mlx_ptr, fdf->mlx_win, fdf->mlx_img, 0, 0);
 }
 
 static int	key_press(int key, void *param)
@@ -63,9 +62,51 @@ static int	mouse_press(int button, int x, int y, void *param)
 	(void)x;
 	(void)y;
 	if (button == SCROLL_UP || button == SCROLL_DOWN)
+	{
 		zoom(button, fdf);
-	redraw(fdf);
+		redraw(fdf);
+	}
+	if (button == LEFT_CLICK)
+		fdf->mouse->is_pressed = 1;
+	if (button == RIGHT_CLICK)
+		fdf->mouse->is_pressed = 2;
 	printf("button = %d\n", button);
+	return (0);
+}
+
+static int	mouse_release(int button, int x, int y, void *param)
+{
+	t_fdf	*fdf;
+
+	(void)button;
+	(void)x;
+	(void)y;
+	fdf = (t_fdf*)param;
+	fdf->mouse->is_pressed = 0;
+	return (0);
+}
+
+static int	mouse_move(int x, int y, void *param)
+{
+	t_fdf	*fdf;
+
+	fdf = (t_fdf*)param;
+	fdf->mouse->prev_x = fdf->mouse->x;
+	fdf->mouse->prev_y = fdf->mouse->y;
+	fdf->mouse->x = x;
+	fdf->mouse->y = y;
+	if (fdf->mouse->is_pressed == 1)
+	{
+		fdf->camera->y_angle -= 0.003 * (fdf->mouse->x - fdf->mouse->prev_x);
+		fdf->camera->x_angle -= 0.003 * (fdf->mouse->prev_y - fdf->mouse->y);
+		redraw(fdf);
+	}
+	if (fdf->mouse->is_pressed == 2)
+	{
+		fdf->camera->x_margin += fdf->mouse->x - fdf->mouse->prev_x;
+		fdf->camera->y_margin += fdf->mouse->y - fdf->mouse->prev_y;
+		redraw(fdf);
+	}
 	return (0);
 }
 
@@ -73,5 +114,7 @@ void		manage_events(t_fdf *fdf)
 {
 	mlx_hook(fdf->mlx_win, 2, 0, key_press, fdf);
 	mlx_hook(fdf->mlx_win, 4, 0, mouse_press, fdf);
+	mlx_hook(fdf->mlx_win, 6, 0, mouse_move, fdf);
+	mlx_hook(fdf->mlx_win, 5, 0, mouse_release, fdf);
 	mlx_hook(fdf->mlx_win, 17, 0, ft_exit4, fdf);
 }

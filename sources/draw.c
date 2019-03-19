@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 15:21:05 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/18 19:02:54 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 15:20:05 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void		draw(t_fdf *fdf)
 	int	x;
 	int	y;
 
+	background_color(fdf);
 	y = 0;
 	while (y < fdf->map->nb_lines)
 	{
@@ -74,4 +75,5 @@ void		draw(t_fdf *fdf)
 		y++;
 	}
 	mlx_put_image_to_window(fdf->mlx_ptr, fdf->mlx_win, fdf->mlx_img, 0, 0);
+	display_menu(fdf);
 }

@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:00:05 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/18 18:49:06 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 13:44:10 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ void	change_projection(int key, t_fdf *fdf)
 {
 	if (key == P)
 	{
+		fdf->camera->x_angle = 0;
+		fdf->camera->y_angle = 0;
+		fdf->camera->z_angle = 0;
 		if (fdf->camera->projection == ISO)
 			fdf->camera->projection = PARALLEL;
 		else

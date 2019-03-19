@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 15:23:52 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/18 19:02:52 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/19 12:46:17 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@
 # define ESC			53
 # define SCROLL_UP		5
 # define SCROLL_DOWN	4
+# define LEFT_CLICK		1
+# define RIGHT_CLICK	2
 
 #endif
