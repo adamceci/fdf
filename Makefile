@@ -6,7 +6,7 @@
 #    By: aceciora <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/14 17:31:41 by aceciora          #+#    #+#              #
-#    Updated: 2019/03/19 17:53:03 by aceciora         ###   ########.fr        #
+#    Updated: 2019/03/20 15:02:38 by aceciora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ SRCS_LIST = main.c					\
 	   		events.c				\
 	   		events_list.c			\
 	   		events_list2.c			\
-	   		background_and_menu.c
+	   		background_and_menu.c	\
+	   		colors.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
 
 OBJS_DIR = objects/

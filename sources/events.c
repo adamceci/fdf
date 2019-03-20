@@ -6,14 +6,14 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:36:39 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 17:52:14 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/20 17:03:35 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "keys.h"
 
-static void	redraw(t_fdf *fdf)
+void	redraw(t_fdf *fdf)
 {
 	mlx_destroy_image(fdf->mlx_ptr, fdf->mlx_img);
 	if (!(fdf->mlx_img = mlx_new_image(fdf->mlx_ptr, WIDTH, HEIGHT)))
@@ -42,14 +42,14 @@ static int	key_press(int key, void *param)
 		rotate_y(key, fdf);
 	if (key == Z_ROT_L || key == Z_ROT_R)
 		rotate_z(key, fdf);
-	if (key == P)
-		change_projection(key, fdf);
-	if (key == SPACE)
-		reset(key, fdf);
+	if (key == C)
+		change_color(key, fdf);
+	change_projection(key, fdf);
+	draw_points(key, fdf);
+	reset(key, fdf);
 	if (key == ESC)
 		ft_exit3("Au revoir mon petit lapin, tot ziens mijn klein konijntje",
 					fdf);
-	redraw(fdf);
 	printf("%d\n", key);
 	return (0);
 }
@@ -70,7 +70,6 @@ static int	mouse_press(int button, int x, int y, void *param)
 		fdf->mouse->is_pressed = 1;
 	if (button == RIGHT_CLICK)
 		fdf->mouse->is_pressed = 2;
-	printf("button = %d\n", button);
 	return (0);
 }
 

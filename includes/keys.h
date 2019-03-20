@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 15:23:52 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 12:46:17 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/20 17:01:06 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define Z_ROT_L		75
 # define Z_ROT_R		67
 # define P				35
+# define C				8
+# define POINT			47
 # define SPACE			49
 # define ESC			53
 # define SCROLL_UP		5

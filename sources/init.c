@@ -6,11 +6,18 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 18:43:55 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 17:52:27 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/20 15:27:11 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	init_fdf(t_fdf *fdf)
+{
+	fdf->tab_ratio[0] = 1;
+	fdf->tab_ratio[1] = 0;
+	fdf->tab_ratio[2] = 0;
+}
 
 void	init_camera(t_fdf *fdf)
 {

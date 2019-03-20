@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:14:02 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 17:51:54 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/20 16:11:34 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	lst_to_array(t_points **head, t_fdf *fdf)
 		lst_pop(head);
 		i--;
 	}
-	fdf->map->z_range = max_z - min_z;
+	fdf->map->z_min = min_z;
+	fdf->map->z_range = abs(max_z - min_z);
 }

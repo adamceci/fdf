@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:51:43 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 17:51:46 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/20 15:17:00 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 	head = NULL;
 	read_map(fd, &head, fdf);
 	lst_to_array(&head, fdf);
+	init_fdf(fdf);
 	init_camera(fdf);
 	init_mlx(fdf);
 	init_mouse(fdf);

@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:00:05 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 17:52:19 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/20 16:59:51 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	zoom(int key, t_fdf *fdf)
 	else if (key == MAIN_MINUS || key == PAD_MINUS || key == SCROLL_DOWN)
 		fdf->camera->zoom -= 1;
 	(fdf->camera->zoom < 0) ? fdf->camera->zoom = 0 : fdf->camera->zoom;
+	redraw(fdf);
 }
 
 void	translation(int key, t_fdf *fdf)
@@ -32,6 +33,7 @@ void	translation(int key, t_fdf *fdf)
 		fdf->camera->y_margin -= 10;
 	else if (key == DOWN_ARROW)
 		fdf->camera->y_margin += 10;
+	redraw(fdf);
 }
 
 void	 altitude(int key, t_fdf *fdf)
@@ -40,6 +42,7 @@ void	 altitude(int key, t_fdf *fdf)
 		fdf->camera->altitude += 0.1;
 	else if (key == I)
 		fdf->camera->altitude -= 0.1;
+	redraw(fdf);
 }
 
 void	change_projection(int key, t_fdf *fdf)
@@ -53,11 +56,15 @@ void	change_projection(int key, t_fdf *fdf)
 			fdf->camera->projection = PARALLEL;
 		else
 			fdf->camera->projection = ISO;
+		redraw(fdf);
 	}
 }
 
 void	reset(int key, t_fdf *fdf)
 {
 	if (key == SPACE)
+	{
 		init_camera(fdf);
+		redraw(fdf);
+	}
 }
