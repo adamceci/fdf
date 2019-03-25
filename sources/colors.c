@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 14:57:02 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/20 17:03:37 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 15:39:01 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static double	get_percent(int z, t_fdf *fdf)
 	return (percent);
 }
 
-void		get_color(t_points *p, t_fdf *fdf)
+void			get_color(t_points *p, t_fdf *fdf)
 {
 	p->percent = get_percent(p->z, fdf);
 	if (fdf->tab_ratio[0] == 1)

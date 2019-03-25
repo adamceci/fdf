@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 14:50:56 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 17:52:37 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 15:52:52 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	fill_coord(t_points **head, char *line, t_fdf *fdf)
 	char		**l_values;
 	int			i;
 
-	if(!(l_values = ft_strsplit(line, ' ')))
+	if (!(l_values = ft_strsplit(line, ' ')))
 		ft_exit2("Invalid file", head, fdf);
 	i = 0;
-	while(l_values[i])
+	while (l_values[i])
 	{
 		if (!(current = (t_points*)malloc(sizeof(t_points))))
 		{
@@ -44,7 +44,7 @@ void		read_map(int fd, t_points **head, t_fdf *fdf)
 	char		*line;
 	int			result;
 
-	if(!(fdf->map = (t_map*)malloc(sizeof(t_map))))
+	if (!(fdf->map = (t_map*)malloc(sizeof(t_map))))
 		ft_exit2("malloc() failed", head, fdf);
 	fdf->map->nb_lines = 0;
 	while ((result = get_next_line(fd, &line) == 1))

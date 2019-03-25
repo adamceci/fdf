@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 16:40:24 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/20 17:03:34 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:00:36 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,4 @@ void	change_color(int key, t_fdf *fdf)
 		}
 	}
 	redraw(fdf);
-}
-
-void	draw_points(int keym t_fdf *fdf)
-{
-	if (key == POINT)
-	{
-	}
 }

@@ -6,22 +6,12 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 14:36:39 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/20 17:03:35 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:00:27 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "keys.h"
-
-void	redraw(t_fdf *fdf)
-{
-	mlx_destroy_image(fdf->mlx_ptr, fdf->mlx_img);
-	if (!(fdf->mlx_img = mlx_new_image(fdf->mlx_ptr, WIDTH, HEIGHT)))
-		ft_exit3("failed to create an image", fdf);
-	fdf->mlx_data_addr = (int*)mlx_get_data_addr(fdf->mlx_img, &(fdf->bpp),
-											&(fdf->s_l), &(fdf->endian));
-	draw(fdf);
-}
 
 static int	key_press(int key, void *param)
 {
@@ -45,12 +35,9 @@ static int	key_press(int key, void *param)
 	if (key == C)
 		change_color(key, fdf);
 	change_projection(key, fdf);
-	draw_points(key, fdf);
 	reset(key, fdf);
 	if (key == ESC)
-		ft_exit3("Au revoir mon petit lapin, tot ziens mijn klein konijntje",
-					fdf);
-	printf("%d\n", key);
+		ft_exit3("Program exited", fdf);
 	return (0);
 }
 

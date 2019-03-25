@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:14:02 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/20 16:11:34 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 15:38:36 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	lst_to_array(t_points **head, t_fdf *fdf)
 		if ((*head)->z < min_z)
 			min_z = (*head)->z;
 		if ((*head)->z > max_z)
-			max_z = (*head)->z; 
-		fdf->map->coords_arr[i] = (*head)->z;	
+			max_z = (*head)->z;
+		fdf->map->coords_arr[i] = (*head)->z;
 		lst_pop(head);
 		i--;
 	}

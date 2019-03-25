@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:51:43 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/20 15:17:00 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 15:48:42 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ int	main(int argc, char **argv)
 	draw(fdf);
 	manage_events(fdf);
 	mlx_loop(fdf->mlx_ptr);
-
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 18:43:55 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/20 15:27:11 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:28:40 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	init_mlx(t_fdf *fdf)
 		ft_exit3("failed to create a new window", fdf);
 	if (!(fdf->mlx_img = mlx_new_image(fdf->mlx_ptr, WIDTH, HEIGHT)))
 		ft_exit3("failed to create an image", fdf);
-	fdf->mlx_data_addr = (int*)mlx_get_data_addr(fdf->mlx_img, &(fdf->bpp), &(fdf->s_l), &(fdf->endian));
+	fdf->mlx_data_addr = (int*)mlx_get_data_addr(fdf->mlx_img, &(fdf->bpp),
+												&(fdf->s_l), &(fdf->endian));
 }
 
 void	init_mouse(t_fdf *fdf)

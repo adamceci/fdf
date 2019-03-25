@@ -6,11 +6,21 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 15:21:05 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/20 17:03:35 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 15:50:47 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void		redraw(t_fdf *fdf)
+{
+	mlx_destroy_image(fdf->mlx_ptr, fdf->mlx_img);
+	if (!(fdf->mlx_img = mlx_new_image(fdf->mlx_ptr, WIDTH, HEIGHT)))
+		ft_exit3("failed to create an image", fdf);
+	fdf->mlx_data_addr = (int*)mlx_get_data_addr(fdf->mlx_img, &(fdf->bpp),
+											&(fdf->s_l), &(fdf->endian));
+	draw(fdf);
+}
 
 static void	iso(int *x, int *y, int z)
 {
@@ -29,7 +39,7 @@ t_points	projection(t_points p, t_fdf *fdf)
 	p.y *= fdf->camera->zoom;
 	p.z *= fdf->camera->zoom / fdf->camera->z_divisor * fdf->camera->altitude;
 	p.x -= fdf->map->nb_cols / 2 * fdf->camera->zoom;
-	p.y -= fdf->map->nb_lines/ 2 * fdf->camera->zoom;
+	p.y -= fdf->map->nb_lines / 2 * fdf->camera->zoom;
 	rotate_x_axis(&p.y, &p.z, fdf->camera->x_angle);
 	rotate_y_axis(&p.x, &p.z, fdf->camera->y_angle);
 	rotate_z_axis(&p.x, &p.y, fdf->camera->z_angle);

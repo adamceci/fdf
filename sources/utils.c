@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:10:57 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/19 17:52:47 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:28:27 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_exit1(const char *s)
 	exit(1);
 }
 
-
 void	ft_exit2(const char *s, t_points **head, t_fdf *fdf)
 {
 	free_list(head);
@@ -54,6 +53,8 @@ void	ft_exit3(const char *s, t_fdf *fdf)
 	}
 	if (fdf->camera)
 		free(fdf->camera);
+	if (fdf->mouse)
+		free(fdf->mouse);
 	ft_putendl_fd(s, 2);
 	exit(1);
 }

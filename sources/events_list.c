@@ -6,7 +6,7 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:00:05 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/20 16:59:51 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 15:40:16 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	translation(int key, t_fdf *fdf)
 	redraw(fdf);
 }
 
-void	 altitude(int key, t_fdf *fdf)
+void	altitude(int key, t_fdf *fdf)
 {
 	if (key == U)
 		fdf->camera->altitude += 0.1;

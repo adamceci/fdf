@@ -6,20 +6,16 @@
 /*   By: aceciora <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 10:57:49 by aceciora          #+#    #+#             */
-/*   Updated: 2019/03/20 16:57:41 by aceciora         ###   ########.fr       */
+/*   Updated: 2019/03/21 15:48:50 by aceciora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include <stdio.h>
-#include <errno.h>
-
-#include "libft.h"
-#include "mlx.h"
-#include <math.h>
-
+# include "libft.h"
+# include "mlx.h"
+# include <math.h>
 # define HEIGHT 1080
 # define WIDTH	1920
 # define MENU_WIDTH	320
@@ -31,7 +27,7 @@ typedef enum
 	PARALLEL
 }	t_projection;
 
-typedef struct	s_points
+typedef struct		s_points
 {
 	int				x;
 	int				y;
@@ -60,7 +56,6 @@ typedef struct		s_map
 	int				nb_cols;
 	int				nb_lines;
 	int				*coords_arr;
-//	int				*colors_arr;
 	int				z_min;
 	int				z_range;
 }					t_map;
@@ -125,6 +120,7 @@ void				zoom(int key, t_fdf *fdf);
 void				translation(int key, t_fdf *fdf);
 void				altitude(int key, t_fdf *fdf);
 void				change_projection(int key, t_fdf *fdf);
+void				draw_points(int key, t_fdf *fdf);
 void				change_color(int key, t_fdf *fdf);
 void				reset(int key, t_fdf *fdf);
 void				rotate_x(int key, t_fdf *fdf);
